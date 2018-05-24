@@ -33,6 +33,12 @@
 			if ($name == ""){
 				$name = "anonymous".$numid;
 			}
+			if (!$message == ""){
+				$f = fopen($file, "a");
+				fwrite ($f, "$name at $timestamp\n");
+				fwrite ($f, "$message\n");
+				fclose ($f);
+			}
 			$f = fopen($file, "a");
 			fwrite ($f, "$name at $timestamp\n");
 			fwrite ($f, "$message\n");
