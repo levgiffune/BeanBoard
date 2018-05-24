@@ -22,7 +22,7 @@
     $file = "posts.txt";
 	if (!is_file($file)){
 		$f = fopen($file, "w") or die ("cannot create file: posts.txt");
-		fclose($file);
+		fclose($f);
 		chmod($file, 0777); 
 	}
 	
