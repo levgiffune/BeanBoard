@@ -35,14 +35,10 @@
 			}
 			if (!$message == ""){
 				$f = fopen($file, "a");
-				fwrite ($f, "$name at $timestamp\n");
+				fwrite ($f, "$name on $timestamp\n");
 				fwrite ($f, "$message\n");
 				fclose ($f);
 			}
-			$f = fopen($file, "a");
-			fwrite ($f, "$name at $timestamp\n");
-			fwrite ($f, "$message\n");
-			fclose ($f);
 	}
 	$f = fopen("posts.txt", "r") or die("cannot open file: posts.txt");
 	
@@ -59,7 +55,6 @@
 	    }
 
 	    fclose($f);
-		sleep (1);
 	}
 	
 ?>
