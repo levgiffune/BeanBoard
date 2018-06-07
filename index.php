@@ -34,13 +34,21 @@
 				$name = "anonymous".$numid;
 			}
 			if (!$message == ""){
-				$f = fopen($file, "a");
-				fwrite ($f, "$name on $timestamp\n");
-				fwrite ($f, "$message\n");
-				fclose ($f);
+			    $context = stream_context_create();
+			    $orig_file = fopen($file, 'r', 1, $context);
+
+			    $temp_filename = tempnam(sys_get_temp_dir(), 'php_prepend_');
+			    file_put_contents($temp_filename, "$name on $timestamp\n");
+				file_put_contents($temp_filename, "$message\n", FILE_APPEND);
+			    file_put_contents($temp_filename, $orig_file, FILE_APPEND);
+
+			    fclose($orig_file);
+			    unlink($file);
+			    rename($temp_filename, $file);
 			}
 	}
-	$f = fopen("posts.txt", "r") or die("cannot open file: posts.txt");
+	
+	$f = fopen("$file", "r") or die("cannot open file: posts.txt");
 	
 	if ($f) {
 		$x = -1;
