@@ -1,21 +1,3 @@
-<form action="<?php echo ($_SERVER["PHP_SELF"]);?>" method="post" name="guest">
-	Username (optional):    
-	
-	<input type="text" name="name"/>
-
-	</br>
-	</br>
-	</br>
-
-	Message:
-
-	<textarea cols="50" name="message" rows="10"> </textarea>
-
-	</br>
-	</br>
-
-	<input type="submit" value="post" name="submit"/>
-</form>
 <?php
 	date_default_timezone_set('America/New_York');
 	$timestamp = date("D, d M Y H:i:s");
@@ -47,22 +29,7 @@
 			    rename($temp_filename, $file);
 			}
 	}
-	
-	$f = fopen("$file", "r") or die("cannot open file: posts.txt");
-	
-	if ($f) {
-		$x = -1;
-	    while (($line = fgets($f)) !== false) {
-			print $line;
-			
-			if ($x == 1){
-				print "</br></br><hr size=1px>";
-			}else {
-				print "-</br>";}
-			$x *= -1;
-	    }
-
-	    fclose($f);
-	}
+	header('Location: index.html');
+	exit;
 	
 ?>

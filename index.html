@@ -1,0 +1,32 @@
+<form action="post.php" method="post" name="guest">
+	Username (optional):    
+	
+	<input type="text" name="name"/>
+
+	</br>
+	</br>
+	</br>
+
+	Message:
+
+	<textarea cols="50" name="message" rows="10"> </textarea>
+
+	</br>
+	</br>
+
+	<input type="submit" value="post" name="submit"/>
+</form>
+<div id="posts"></div>
+<script type="text/javascript">
+	function loadDoc() {
+	  var xhttp = new XMLHttpRequest();
+	  xhttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	      document.getElementById("posts").innerHTML = this.responseText;
+	    }
+	  };
+	  xhttp.open("GET", "load.php", true);
+	  xhttp.send();
+	}
+	setInterval(loadDoc, 5000);
+</script>
