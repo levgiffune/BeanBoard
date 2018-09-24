@@ -10,8 +10,8 @@
 	}
 	
 	if ( isset( $_POST['submit'] ) ) { 
-			$name = $_POST["name"];
-			$message = $_POST["message"];
+			$name = htmlspecialchars($_POST["name"], ENT_QUOTES);
+			$message = htmlspecialchars($_POST["message"], ENT_QUOTES);
 			//Anonymous names so that there's never a blank name field
 			$numid = rand(00000, 99999);
 			if ($name == ""){
