@@ -1,6 +1,6 @@
 <?php
 	$file = "posts.txt";
-	//again, I dont want to keep posts.txt in the git repo I guess idk
+	//again, I dont want to keep posts.txt in the git repo
 	if (!is_file($file)){
 		$f = fopen($file, "w") or die ("cannot create file: posts.txt");
 		fclose($f);
