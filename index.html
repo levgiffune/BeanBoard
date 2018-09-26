@@ -16,7 +16,9 @@
 
 	<input type="submit" value="post" name="submit"/>
 </form>
-<div id="posts"></div>
+<div id="posts">
+	<img src="loading.gif" style="position: absolute;width:25%; height:40%;left:40%;"/>
+</div>
 <script type="text/javascript">
 	function loadDoc() {
 	  var xhttp = new XMLHttpRequest();
@@ -28,5 +30,6 @@
 	  xhttp.open("GET", "load.php", true);
 	  xhttp.send();
 	}
+	loadDoc();
 	setInterval(loadDoc, 5000);
 </script>
