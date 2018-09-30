@@ -22,9 +22,9 @@
 	$table = mysqli_query($conn, $query);
 	
 	if($table){
-		echo "last refreshed at: ".$timestamp;
+		echo '<div style="color:green">last refreshed on: '.$timestamp.'</div></br></br>';
 		while($row = mysqli_fetch_array($table)){   //Creates a loop to loop through results
-			echo "</br></br><hr size=1px>" . $row['name'] . " at ".$row['timestamph']." -</br>" . $row['post'];  
+			echo $row['name'] . " at ".$row['timestamph']." -</br>" . $row['post']."</br></br><hr size=1px>";
 		}
 	}
 ?>
