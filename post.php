@@ -24,8 +24,8 @@
 	mysqli_query($conn, $query);
 	if(isset($_POST['submit'])){
 		$loggedin = (strlen($_COOKIE['token']) < 20 ? 1 : 0)/* <-- see index.html line 34*/;
-		$token = mysqli_real_escape_string($_COOKIE['token']);
-		$message = mysqli_real_escape_string(htmlspecialchars($_POST["message"], ENT_QUOTES));
+		$token = mysqli_real_escape_string($conn, $_COOKIE['token']);
+		$message = mysqli_real_escape_string($conn, htmlspecialchars($_POST["message"], ENT_QUOTES));
 		$query = 'INSERT INTO posts (loggedin,name,timestamph,post) VALUES ('.$loggedin.',"anonyomous'.$token.'","'.$timestamp.'","'. $message.'")';
 		mysqli_query($conn, $query);
 	}
