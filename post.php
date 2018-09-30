@@ -1,37 +1,33 @@
 <?php
 	date_default_timezone_set('America/New_York');
 	$timestamp = date("D, d M Y H:i:s");
-    $file = "posts.txt";
-	//bc I dont want to keep posts.txt in the git repo I guess idk
-	if (!is_file($file)){
-		$f = fopen($file, "w") or die ("cannot create file: posts.txt");
-		fclose($f);
-		chmod($file, 0777); 
+	//config, change these to your own values for your db
+	$sqlserver="127.0.0.1";
+	$sqluser="root";
+	$sqlpass="PervertedLem0n.exe";
+	$db = "BoardDB";
+	//end config
+	
+	// Create connection
+	$conn = mysqli_connect($sqlserver, $sqluser, $sqlpass);
+
+	// Check connection
+	if (!$conn) {
+	    die("Connection failed: " . mysqli_connect_error());
 	}
 	
-	if ( isset( $_POST['submit'] ) ) { 
-			$name = htmlspecialchars($_POST["name"], ENT_QUOTES);
-			$message = htmlspecialchars($_POST["message"], ENT_QUOTES);
-			//Anonymous names so that there's never a blank name field
-			$numid = rand(00000, 99999);
-			if ($name == ""){
-				$name = "anonymous".$numid;
-			}
-			//no blank message bc why?
-			if ($message){
-				//idrk what this does bc I'm too lazy to know what I'm doing but it works
-			    $context = stream_context_create();
-			    $orig_file = fopen($file, 'r', 1, $context);
-				//so new messages are on top
-			    $temp_filename = tempnam(sys_get_temp_dir(), 'php_prepend_');
-			    file_put_contents($temp_filename, "$name on $timestamp\n");
-				file_put_contents($temp_filename, "$message\n", FILE_APPEND);
-			    file_put_contents($temp_filename, $orig_file, FILE_APPEND);
-
-			    fclose($orig_file);
-			    unlink($file);
-			    rename($temp_filename, $file);
-			}
+	$query = "CREATE DATABASE IF NOT EXISTS ".$db;
+	mysqli_query($conn, $query);
+	$query = "USE ".$db;
+	mysqli_query($conn, $query);
+	$query = "CREATE TABLE IF NOT EXISTS posts(ID int NOT NULL AUTO_INCREMENT, loggedin BOOLEAN, name varchar(20), timestamph varchar(30), post TEXT, PRIMARY KEY (ID))";
+	mysqli_query($conn, $query);
+	if(isset($_POST['submit'])){
+		$loggedin = ($_COOKIE['token'].length < 20 ? 1 : 0)/* <-- see index.html line 34*/;
+		$token = $_COOKIE['token'];
+		$message = htmlspecialchars($_POST["message"], ENT_QUOTES);
+		$query = 'INSERT INTO posts (loggedin,name,timestamph,post) VALUES ('.$loggedin.',"anonyomous'.$token.'","'.$timestamp.'","'. $message.'")';
+		mysqli_query($conn, $query);
 	}
 	header('Location: index.html');
 	exit;

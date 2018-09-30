@@ -1,11 +1,4 @@
 <form action="post.php" method="post" name="guest">
-	Username (optional):    
-	
-	<input type="text" name="name"/>
-
-	</br>
-	</br>
-	</br>
 
 	Message:
 
@@ -20,6 +13,18 @@
 	<img src="loading.gif" style="position: absolute;width:25%; height:40%;left:40%;"/>
 </div>
 <script type="text/javascript">
+	function makeid(length) {
+	  var text = "";
+	  var possible = "0123456789";
+
+	  for (var i = 0; i < length; i++)
+	    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+	  return text;
+	}
+	//anonymous token for not logged in users
+	//later login.php will make longer ones for those with accounts because its an easy way to check if users are logged in and I don't rally care about anonymous users getting hijacked 
+	document.cookie = "token = " + makeid(7);
 	function loadDoc() {
 	  var xhttp = new XMLHttpRequest();
 	  xhttp.onreadystatechange = function() {
