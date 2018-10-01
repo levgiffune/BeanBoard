@@ -2,13 +2,6 @@
 	// Include config file
 	require_once "config.php";
 	$timestamp = date("D, d M Y H:i:s");
-	// Create connection
-	$conn = mysqli_connect($sqlserver, $sqluser, $sqlpass);
-
-	// Check connection
-	if (!$conn) {
-	    die("Connection failed: " . mysqli_connect_error());
-	}
 	
 	$query = "CREATE DATABASE IF NOT EXISTS ".$db;
 	mysqli_query($conn, $query);
