@@ -1,7 +1,6 @@
 <?php
 date_default_timezone_set('America/New_York');
-/* Database credentials. Assuming you are running MySQL
-server with default setting (user 'root' with no password) */
+/* Database credentials.*/
 define('DB_SERVER', '127.0.0.1');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
