@@ -1,13 +1,7 @@
 <?php
-	date_default_timezone_set('America/New_York');
+	// Include config file
+	require_once "config.php";
 	$timestamp = date("D, d M Y H:i:s");
-	//config, change these to your own values for your db
-	$sqlserver="127.0.0.1";
-	$sqluser="root";
-	$sqlpass="PervertedLem0n.exe";
-	$db = "BoardDB";
-	//end config
-	
 	// Create connection
 	$conn = mysqli_connect($sqlserver, $sqluser, $sqlpass);
 

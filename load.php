@@ -1,13 +1,7 @@
 <?php
-	date_default_timezone_set('America/New_York');
-	$timestamp = date("D, d M Y H:i:s");
-	//config, change these to your own values for your db
-	$sqlserver="127.0.0.1";
-	$sqluser="root";
-	$sqlpass="PervertedLem0n.exe";
-	$db = "BoardDB";
-	//end config
-	
+	// Include config file
+	require_once "config.php";
+		$timestamp = date("D, d M Y H:i:s");
 	// Create connection
 	$conn = mysqli_connect($sqlserver, $sqluser, $sqlpass);
 	
@@ -24,7 +18,7 @@
 	if($table){
 		echo '<div style="color:green">last refreshed on: '.$timestamp.'</div></br></br>';
 		while($row = mysqli_fetch_array($table)){   //Creates a loop to loop through results
-			echo $row['name'] . " at ".$row['timestamph']." -</br>" . $row['post']."</br></br><hr size=1px>";
+			echo $row['name'] . " at ".$row['timestamph']." -</br></br>" . $row['post']."</br><hr size=1px>";
 		}
 	}
 ?>
